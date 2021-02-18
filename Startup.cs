@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ProductMicroService.Repository;
 
 namespace ProductMicroService
 {
@@ -32,6 +33,7 @@ namespace ProductMicroService
 
             services.AddControllers();
             services.AddDbContext<ProductContext>(o => o.UseSqlServer(Configuration.GetConnectionString("PracticeDB")));
+            services.AddTransient<IProductRepository, ProductRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProductMicroService", Version = "v1" });
